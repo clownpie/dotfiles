@@ -1,0 +1,14 @@
+
+function fish_prompt
+  set -l st (echo $status)
+  set -l home_escaped (echo -n $HOME | sed 's/\//\\\\\//g')
+  set -l pwd (echo -n $PWD | sed "s/^$home_escaped/~/" | sed 's/ /%20/g')
+  printf '\n%s[%s] %s%s:%s%s\n' (set_color CCCC00) (date "+$c2%H$c0:$c2%M$c0:$c2%S") (set_color 00AA00) (hostname) (set_color normal) $pwd
+  if [ $st -ne 0 ]
+    printf '%sLast command returned non-zero: %s%s\n' (set_color FF0000) $st (set_color normal)
+  end
+  printf '%s %s=>%s ' (whoami) (set_color AA0000) (set_color normal)
+end
+
+set CDPATH .
+

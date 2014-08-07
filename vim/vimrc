@@ -1,0 +1,55 @@
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
+  autocmd BufRead,BufNewFile,FileReadPost *.py source ~/.vimrc_python
+endif
+
+
+" This beauty remembers where you were the last time you edited the file, and returns to the same position.
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+au BufNewFile,BufRead *.gradle setfiletype groovy
+
+" using j/k the cursor will cause the page to move when within 7 lines
+set so=7
+
+set nowrap
+set hlsearch
+
+map <C-J> <C-W>w
+
+set foldenable          " Turn on folding
+set foldmethod=indent   " Fold on indent
+set foldlevel=100       " Don't fold automatically
+set foldopen-=search    " Don't unfold on search
+set foldopen-=undo      " Don't unfold on undo
+hi Folded cterm=bold ctermfg=6 ctermbg=0
+hi FoldColumn cterm=bold ctermfg=6 ctermbg=0
+
+set ts=2 sw=2 sta et sts=2 ai  " tw=78 
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+
