@@ -1,0 +1,7 @@
+[user]
+	email = George Tebbetts <george.tebbetts@gmail.com>
+[color]
+	ui = true
+[core]
+	page = false
+	pager = cat
