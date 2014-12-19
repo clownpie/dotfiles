@@ -5,7 +5,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-for_window [class="com-allstontrading-casper-jalan-CasperMain"] floating enable
+for_window [title="^Casper - .*$"] floating enable
 for_window [class="com-allstontrading-jasper-gl-JasperTreeMain"] floating enable
 
 set $mod Mod4
@@ -25,9 +25,6 @@ client.focused_inactive #333333 #003399 #ffffff #ff8400
 client.unfocused        #333333 #222222 #888888 #ff8400
 client.urgent           #2f343a #900000 #ffffff #ff8400
 #client.placeholder      #2f343a #900000 #ffffff #900000
-
-# Toggle back in forth between newly selected workspace.
-workspace_auto_back_and_forth yes
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -57,23 +54,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+y split h
@@ -124,6 +109,15 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# Change workspace left and right.
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
+bindsym $mod+Shift+Left move workspace prev
+bindsym $mod+Shift+Right move workspace next
+
+# Toggle back in forth between newly selected workspace.
+workspace_auto_back_and_forth yes
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
