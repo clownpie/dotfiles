@@ -5,6 +5,9 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+for_window [class="com-allstontrading-casper-jalan-CasperMain"] floating enable
+for_window [class="com-allstontrading-jasper-gl-JasperTreeMain"] floating enable
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -16,15 +19,12 @@ set $mod Mod4
 # chose a FreeType font, such as:
 font pango:DejaVu Sans Mono 10
 
-# class                   border backgr. text   indicator
-# client.focused          #4c7899 #285577 #ffffff #2e9ef4
-client.focused          #ff0000 #ff0000 #ffffff #2e9ef4
-# client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.focused_inactive #333333 #ff8533 #ffffff #484e50
-# client.unfocused        #333333 #222222 #888888 #292d2e
-# client.urgent           #2f343a #900000 #ffffff #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000
-client.background #ff0000
+# class                 border  backgr. text    indicator
+client.focused          #33cc33 #33cc33 #ffffff #ff8400
+client.focused_inactive #333333 #003399 #ffffff #ff8400
+client.unfocused        #333333 #222222 #888888 #ff8400
+client.urgent           #2f343a #900000 #ffffff #ff8400
+#client.placeholder      #2f343a #900000 #ffffff #900000
 
 # Toggle back in forth between newly selected workspace.
 workspace_auto_back_and_forth yes
@@ -36,6 +36,9 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec gnome-terminal
 
+# start ipython in a terminal
+bindsym $mod+backslash exec gnome-terminal -e ipython
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -45,6 +48,8 @@ bindsym $mod+d exec dmenu_run
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+#bindsym $mod+i exec setxkbmap
 
 # change focus
 bindsym $mod+h focus left
@@ -156,5 +161,5 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  status_command i3status -c ~/.i3/i3status.conf
 }
